@@ -113,7 +113,7 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
                 fileInputStream = new FileInputStream(filepath);
 
                 outputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                outputStream.writeBytes("Content-Disposition: form-data; name=\"image\";filename=\"" + filename + "\"" + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" + filename + "\"" + lineEnd);
                 outputStream.writeBytes(lineEnd);
 
                 bytesAvailable = fileInputStream.available();
@@ -143,7 +143,7 @@ public class FileUploadModule extends ReactContextBaseJavaModule {
                 fileInputStream.close();
                 outputStream.flush();
                 outputStream.close();
-                callback.invoke("Error happened: " + serverResponseMessage, null);
+                callback.invoke("Error happened: " + serverResponseMessage + " ResponseCode: " + serverResponseCode, null);
             } else {
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder sb = new StringBuilder();
